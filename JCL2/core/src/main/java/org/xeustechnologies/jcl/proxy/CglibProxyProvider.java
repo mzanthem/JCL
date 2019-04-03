@@ -54,7 +54,7 @@ public class CglibProxyProvider implements ProxyProvider {
         }
     }
 
-    public Object createProxy(Object object, Class superClass, Class[] interfaces, ClassLoader cl) {
+    public Object createProxy(Object object, Class<?> superClass, Class<?>[] interfaces, ClassLoader cl) {
         CglibProxyHandler handler = new CglibProxyHandler( object );
 
         Enhancer enhancer = new Enhancer();
@@ -66,9 +66,9 @@ public class CglibProxyProvider implements ProxyProvider {
         enhancer.setCallback( handler );
 
         if( interfaces != null ) {
-            List<Class> il = new ArrayList<Class>();
+            List<Class<?>> il = new ArrayList<Class<?>>();
 
-            for( Class i : interfaces ) {
+            for( Class<?> i : interfaces ) {
                 if( i.isInterface() ) {
                     il.add( i );
                 }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+	
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS z}] %5p %l: %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<!-- 此处日志文件级别不要变动，即可控制控制台输出文件的内容 -->
+			<param name="LevelMin" value="info" />
+			<param name="LevelMax" value="error" />
+			<param name="AcceptOnMatch" value="false" />
+		</filter>
+	</appender>
+	
+	<appender name="DEBUG" class="org.apache.log4j.RollingFileAppender">
+		<!-- 日志文件全路径名 -->
+		<param name="File" value="../logs/debug.log" />
+		<!--是否在已存在的文件追加写：默认时true，若为false则每次启动都会删除并重新新建文件 -->
+		<param name="Append" value="true" />
+		<!-- 设置当日志文件达到此阈值的时候自动回滚，单位可以是KB，MB，GB，默认单位是KB，默认值是：10MB -->
+		<param name="MaxFileSize" value="100MB" />
+		<!-- 保存备份日志的最大个数，默认值是：1 -->
+		<param name="MaxBackupIndex" value="5" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS z}] %5p %l: %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="DEBUG" />
+			<param name="LevelMax" value="DEBUG" />
+			<param name="AcceptOnMatch" value="false" />
+		</filter>
+	</appender>
+
+	<appender name="INFO" class="org.apache.log4j.RollingFileAppender">
+		<!-- 日志文件全路径名 -->
+		<param name="File" value="../logs/info.log" />
+		<!--是否在已存在的文件追加写：默认时true，若为false则每次启动都会删除并重新新建文件 -->
+		<param name="Append" value="true" />
+		<!-- 设置当日志文件达到此阈值的时候自动回滚，单位可以是KB，MB，GB，默认单位是KB，默认值是：10MB -->
+		<param name="MaxFileSize" value="100MB" />
+		<!-- 保存备份日志的最大个数，默认值是：1 -->
+		<param name="MaxBackupIndex" value="1" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS z}] %5p %l: %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="INFO" />
+			<param name="LevelMax" value="INFO" />
+			<param name="AcceptOnMatch" value="false" />
+		</filter>
+	</appender>
+
+	<appender name="WARN" class="org.apache.log4j.RollingFileAppender">
+		<!-- 日志文件全路径名 -->
+		<param name="File" value="../logs/warn.log" />
+		<!--是否在已存在的文件追加写：默认时true，若为false则每次启动都会删除并重新新建文件 -->
+		<param name="Append" value="true" />
+		<!-- 设置当日志文件达到此阈值的时候自动回滚，单位可以是KB，MB，GB，默认单位是KB，默认值是：10MB -->
+		<param name="MaxFileSize" value="100MB" />
+		<!-- 保存备份日志的最大个数，默认值是：1 -->
+		<param name="MaxBackupIndex" value="2" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS z}] %5p %l: %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="WARN" />
+			<param name="LevelMax" value="WARN" />
+			<param name="AcceptOnMatch" value="false" />
+		</filter>
+	</appender>
+
+	<appender name="ERROR" class="org.apache.log4j.RollingFileAppender">
+		<!-- 日志文件全路径名 -->
+		<param name="File" value="../logs/error.log" />
+		<!--是否在已存在的文件追加写：默认时true，若为false则每次启动都会删除并重新新建文件 -->
+		<param name="Append" value="true" />
+		<!-- 设置当日志文件达到此阈值的时候自动回滚，单位可以是KB，MB，GB，默认单位是KB，默认值是：10MB -->
+		<param name="MaxFileSize" value="100MB" />
+		<!-- 保存备份日志的最大个数，默认值是：1 -->
+		<param name="MaxBackupIndex" value="5" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS z}] %5p %l: %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="ERROR" />
+			<param name="LevelMax" value="ERROR" />
+			<param name="AcceptOnMatch" value="false" />
+		</filter>
+	</appender>
+
+
+
+
+	<root>
+		<level value="debug" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="DEBUG" />
+		<appender-ref ref="INFO" />
+		<appender-ref ref="WARN" />
+		<appender-ref ref="ERROR" />
+	</root>
+</log4j:configuration>

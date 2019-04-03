@@ -64,7 +64,6 @@ public class JclBeanDefinitionDecorator implements BeanDefinitionDecorator {
         return newHolder;
     }
 
-    @SuppressWarnings("unchecked")
     private void createDependencyOnJcl(Node node, BeanDefinitionHolder holder, ParserContext parserContext) {
         AbstractBeanDefinition definition = ( (AbstractBeanDefinition) holder.getBeanDefinition() );
         String jclRef = node.getAttributes().getNamedItem( JCL_REF ).getNodeValue();
@@ -80,7 +79,7 @@ public class JclBeanDefinitionDecorator implements BeanDefinitionDecorator {
             if( dependsOn == null ) {
                 dependsOn = new String[] { jclRef, JCL_FACTORY };
             } else {
-                List dependencies = new ArrayList( Arrays.asList( dependsOn ) );
+                List<String> dependencies = new ArrayList<String>( Arrays.asList( dependsOn ) );
                 dependencies.add( jclRef );
                 dependencies.add( JCL_FACTORY );
                 dependsOn = (String[]) dependencies.toArray( new String[0] );

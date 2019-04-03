@@ -18,9 +18,11 @@
 package org.xeustechnologies.jcl.context;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xeustechnologies.jcl.JarClassLoader;
 import org.xeustechnologies.jcl.exception.JclContextException;
 
@@ -31,15 +33,36 @@ import org.xeustechnologies.jcl.exception.JclContextException;
  * @author Kamran
  * 
  */
-public class JclContext {
-    private static final Map<String, JarClassLoader> loaders = Collections
-            .synchronizedMap( new HashMap<String, JarClassLoader>() );
+public final class JclContext {
+	/** logger **/
+	private static final Logger logger = LoggerFactory.getLogger(JclContext.class);
+	/** using ConcurrentHashMap replace of Collections.synchronizedMap **/
+    private static final Map<String, JarClassLoader> loaders = new ConcurrentHashMap<String, JarClassLoader>();
+    
     public static final String DEFAULT_NAME = "jcl";
 
-    public JclContext() {
+    /**
+     * singleton
+     */
+    private static volatile JclContext instance = new JclContext();
+    public static JclContext getInstance() {
+		return instance;
+	}
+    
+    /**
+     * hold a default JarClassLoader
+     */
+    static {
+		JarClassLoader classLoader = new JarClassLoader();
+		loaders.put(DEFAULT_NAME, classLoader);
+	}
+    
+    private JclContext() {
         validate();
     }
-
+    /**
+     * forbid client to create multiple instance
+     */
     private void validate() {
         if( isLoaded() ) {
             throw new JclContextException( "Context already loaded. Destroy the existing context to create a new one." );
@@ -57,6 +80,7 @@ public class JclContext {
      * @param jcl
      */
     public void addJcl(String name, JarClassLoader jcl) {
+    	logger.debug("add jarClassLoader: {}", name);
         if( loaders.containsKey( name ) )
             throw new JclContextException( "JarClassLoader[" + name + "] already exist. Name must be unique" );
 
@@ -64,18 +88,39 @@ public class JclContext {
     }
 
     /**
+     * remove the JarClassLoader by name
+     * @param name
+     */
+    public static void removeJcl(String name) {
+    	logger.debug("remove jarClassLoader: {}", name);
+		if (loaders.containsKey(name)) {
+			loaders.remove(name);
+		}
+	}
+    
+    /**
      * Clears the context
      */
     public static void destroy() {
+    	logger.debug("destroy all jarClassLoader");
         if( isLoaded() ) {
             loaders.clear();
         }
     }
 
+    /**
+     * get default JarClassLoader
+     * @return
+     */
     public static JarClassLoader get() {
         return loaders.get( DEFAULT_NAME );
     }
 
+    /**
+     * get named JarClassLoader
+     * @param name
+     * @return
+     */
     public static JarClassLoader get(String name) {
         return loaders.get( name );
     }

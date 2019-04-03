@@ -22,5 +22,13 @@ package org.xeustechnologies.jcl.proxy;
  * 
  */
 public interface ProxyProvider {
-    public Object createProxy(Object object, Class superClass, Class[] interfaces, ClassLoader cl);
+	/**
+	 * create Proxy 
+	 * @param object
+	 * @param superClass
+	 * @param interfaces
+	 * @param cl
+	 * @return
+	 */
+    public Object createProxy(Object object, Class<?> superClass, Class<?>[] interfaces, ClassLoader cl);
 }

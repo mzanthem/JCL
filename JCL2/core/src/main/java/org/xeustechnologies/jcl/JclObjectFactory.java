@@ -198,7 +198,7 @@ public class JclObjectFactory {
     private Object newInstance(Object object) {
         if (autoProxy) {
 
-            Class superClass = null;
+            Class<?> superClass = null;
 
             // Check class
             try {
@@ -207,12 +207,12 @@ public class JclObjectFactory {
             } catch (ClassNotFoundException e) {
             }
 
-            Class[] interfaces = object.getClass().getInterfaces();
+            Class<?>[] interfaces = object.getClass().getInterfaces();
 
-            List<Class> il = new ArrayList<Class>();
+            List<Class<?>> il = new ArrayList<Class<?>>();
 
             // Check available interfaces
-            for (Class i : interfaces) {
+            for (Class<?> i : interfaces) {
                 try {
                     Class.forName( i.getClass().getName() );
                     il.add( i );

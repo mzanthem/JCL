@@ -13,7 +13,8 @@ public class SpringTest extends TestCase {
     @Test
     public void testWithSpring() throws ClassNotFoundException, IllegalArgumentException, SecurityException,
             IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-        ClassPathXmlApplicationContext appContext = new ClassPathXmlApplicationContext( "classpath:spring-test.xml" );
+        @SuppressWarnings("resource")
+		ClassPathXmlApplicationContext appContext = new ClassPathXmlApplicationContext( "classpath:spring-test.xml" );
 
         // Bean loaded with JCL
         Object test1 = appContext.getBean( "test1" );

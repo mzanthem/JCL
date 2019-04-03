@@ -1,6 +1,7 @@
 !https://travis-ci.org/kamranzafar/JCL.png?branch=master!:https://travis-ci.org/kamranzafar/JCL
 
-h1.build
+h1. Build
+
 cd JCL
 mvn clean install
 

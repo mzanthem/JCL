@@ -34,7 +34,7 @@ public class DefaultContextLoader implements JclContextLoader {
     private final transient Logger logger = LoggerFactory.getLogger(DefaultContextLoader.class);
 
     public DefaultContextLoader(JarClassLoader jcl) {
-        jclContext = new JclContext();
+        jclContext = JclContext.getInstance();
         this.jcl = jcl;
     }
 

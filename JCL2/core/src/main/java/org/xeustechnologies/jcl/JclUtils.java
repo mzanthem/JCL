@@ -36,7 +36,7 @@ import org.kamranzafar.commons.cloner.ObjectCloner;
 @SuppressWarnings("unchecked")
 public class JclUtils {
 
-    public static Object createProxy(Object object, Class superClass, Class[] interfaces, ClassLoader cl) {
+    public static Object createProxy(Object object, Class<?> superClass, Class<?>[] interfaces, ClassLoader cl) {
         return ProxyProviderFactory.create().createProxy( object, superClass, interfaces, cl );
     }
 
@@ -48,7 +48,7 @@ public class JclUtils {
      * @param clazz
      * @return castable
      */
-    public static Object toCastable(Object object, Class clazz) {
+    public static Object toCastable(Object object, Class<?> clazz) {
         return createProxy( object, clazz, new Class[] { clazz }, null );
     }
 
@@ -61,7 +61,7 @@ public class JclUtils {
      *            []
      * @return castable
      */
-    public static Object toCastable(Object object, Class[] clazz) {
+    public static Object toCastable(Object object, Class<?>[] clazz) {
         return createProxy( object, clazz[0], clazz, null );
     }
 
@@ -73,7 +73,7 @@ public class JclUtils {
      * @param cl
      * @return castable
      */
-    public static Object toCastable(Object object, Class clazz, ClassLoader cl) {
+    public static Object toCastable(Object object, Class<?> clazz, ClassLoader cl) {
         return createProxy( object, clazz, new Class[] { clazz }, cl );
     }
 
@@ -86,7 +86,7 @@ public class JclUtils {
      * @param cl
      * @return castable
      */
-    public static Object toCastable(Object object, Class[] clazz, ClassLoader cl) {
+    public static Object toCastable(Object object, Class<?>[] clazz, ClassLoader cl) {
         return createProxy( object, clazz[0], clazz, cl );
     }
 
@@ -159,7 +159,7 @@ public class JclUtils {
      * @return clone
      */
     public static Object deepClone(Object original) {
-        ObjectCloner cloner = new ObjectCloner();
+        ObjectCloner<Object> cloner = new ObjectCloner<Object>();
 
         return cloner.deepClone( original );
     }
@@ -171,7 +171,7 @@ public class JclUtils {
      * @return clone
      */
     public static Object shallowClone(Object original) {
-        ObjectCloner cloner = new ObjectCloner();
+        ObjectCloner<Object> cloner = new ObjectCloner<Object>();
 
         return cloner.shallowClone( original );
     }

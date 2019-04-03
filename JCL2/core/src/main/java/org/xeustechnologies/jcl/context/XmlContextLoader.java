@@ -81,7 +81,7 @@ public class XmlContextLoader implements JclContextLoader {
 
     public XmlContextLoader(String file) {
         this.file = file;
-        jclContext = new JclContext();
+        jclContext = JclContext.getInstance();
     }
 
     /**
