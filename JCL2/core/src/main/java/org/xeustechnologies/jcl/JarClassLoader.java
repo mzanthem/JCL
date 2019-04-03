@@ -327,4 +327,5 @@ public class JarClassLoader extends AbstractClassLoader {
     public Map<String, Class> getLoadedClasses() {
         return Collections.unmodifiableMap( classes );
     }
+    
 }

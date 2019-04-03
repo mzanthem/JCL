@@ -31,15 +31,21 @@ public class DelegateProxyClassLoaderTest {
 		 * target  classLoader with Test1
 		 */
 		JarClassLoader target = new JarClassLoader();
-		doIsolated(classLoader);
-		assertTrue(classLoader.getLocalLoader().isEnabled());
+//		doIsolated(classLoader);
+//		assertTrue(classLoader.getLocalLoader().isEnabled());
 		target.add(Test1.class.getName());
 		target.loadClass(Test1.class.getName());
+		Class<?> c1 = target.loadClass( "org.xeustechnologies.jcl.sample.Test1" );
+		System.out.println(c1.hashCode());
+		
 		/**
 		 * Add delegate
 		 */
 		classLoader.addLoader(new DelegateProxyClassLoader(target));
 		classLoader.loadClass(Test1.class.getName());
+		Class<?> c2 = classLoader.loadClass( "org.xeustechnologies.jcl.sample.Test1" );
+		System.out.println(c2.hashCode());
+		
 	}
 
 	/**

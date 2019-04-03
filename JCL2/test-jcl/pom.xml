@@ -16,6 +16,7 @@
 				<configuration>
 					<includes>
 						<include>org/xeustechnologies/jcl/test/Test.class</include>
+						<include>org/xeustechnologies/jcl/test/TestInterface.class</include>
 					</includes>
 				</configuration>
 			</plugin>

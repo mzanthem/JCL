@@ -26,8 +26,8 @@ public class SpiTest {
 
         Assert.assertTrue(itr.hasNext());
 
-//        while (itr.hasNext()) {
-//            System.out.println(itr.next());
-//        }
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+        }
     }
 }

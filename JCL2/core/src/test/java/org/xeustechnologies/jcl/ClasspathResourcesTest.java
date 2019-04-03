@@ -16,6 +16,10 @@ import static org.junit.Assert.assertTrue;
  */
 public class ClasspathResourcesTest {
 
+  /**
+   * 原有属性测试
+   * @throws Exception
+   */
   @Test
   public void testLoadResource() throws Exception {
     final String name = "test";
@@ -26,6 +30,10 @@ public class ClasspathResourcesTest {
     assertEquals("testval", props.getProperty("testkey"));
   }
 
+  /**
+   * jar包中的properties属性，替换原有属性
+   * @throws Exception
+   */
   @Test
   public void testLoadResourcesFromJar() throws Exception {
     final String name = "test.jar";
