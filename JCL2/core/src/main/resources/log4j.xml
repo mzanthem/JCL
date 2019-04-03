@@ -95,7 +95,7 @@
 
 
 	<root>
-		<level value="debug" />
+		<level value="DEBUG" />
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="DEBUG" />
 		<appender-ref ref="INFO" />

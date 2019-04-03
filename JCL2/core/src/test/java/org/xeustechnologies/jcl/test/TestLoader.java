@@ -6,7 +6,7 @@ import java.net.URL;
 public class TestLoader extends org.xeustechnologies.jcl.ProxyClassLoader {
 
     @Override
-    public Class loadClass(String className, boolean resolveIt) {
+    public Class<?> loadClass(String className, boolean resolveIt) {
         return null;
     }
 

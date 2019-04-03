@@ -18,11 +18,11 @@ public class SpiTest {
         JarClassLoader jcl = new JarClassLoader();
         jcl.add("./target/test-classes/lucene-core-5.3.1.jar");
 
-        Class codecClass = jcl.loadClass("org.apache.lucene.codecs.Codec");
+        Class<?> codecClass = jcl.loadClass("org.apache.lucene.codecs.Codec");
+        // java spi
+        ServiceLoader<?> serviceLoader = ServiceLoader.load(codecClass, jcl);
 
-        ServiceLoader serviceLoader = ServiceLoader.load(codecClass, jcl);
-
-        Iterator itr = serviceLoader.iterator();
+        Iterator<?> itr = serviceLoader.iterator();
 
         Assert.assertTrue(itr.hasNext());
 

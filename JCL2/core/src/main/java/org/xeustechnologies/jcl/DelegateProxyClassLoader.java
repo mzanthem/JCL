@@ -51,7 +51,7 @@ public class DelegateProxyClassLoader extends ProxyClassLoader {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public Class loadClass(String className, boolean resolveIt) {
+	public Class<?> loadClass(String className, boolean resolveIt) {
 		Class result;
 		try {
 			result = delegate.loadClass(className, resolveIt);

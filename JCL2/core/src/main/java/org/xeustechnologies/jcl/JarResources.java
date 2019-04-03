@@ -25,11 +25,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 
 import org.slf4j.Logger;

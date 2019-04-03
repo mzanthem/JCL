@@ -54,9 +54,14 @@ public class CglibProxyProvider implements ProxyProvider {
         }
     }
 
+    /**
+     * create proxy
+     */
+    @Override
     public Object createProxy(Object object, Class<?> superClass, Class<?>[] interfaces, ClassLoader cl) {
         CglibProxyHandler handler = new CglibProxyHandler( object );
-
+        
+        // create enhancer
         Enhancer enhancer = new Enhancer();
 
         if( superClass != null ) {

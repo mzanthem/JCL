@@ -44,9 +44,11 @@ public final class JclContext {
     /**
      * singleton
      */
-    private static volatile JclContext instance = new JclContext();
+    static class SingletonHolder {
+    	private final static JclContext instance = new JclContext();
+    }
     public static JclContext getInstance() {
-		return instance;
+		return SingletonHolder.instance;
 	}
     
     /**

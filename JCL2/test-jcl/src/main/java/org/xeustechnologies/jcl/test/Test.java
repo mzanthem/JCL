@@ -25,7 +25,8 @@ public class Test implements Serializable, TestInterface {
     public Test(String firstName) {
         this.firstName = firstName;
     }
-
+    
+    @Override
     public String sayHello() {
         String hello = "Hello " + firstName + " " + lastName;
 

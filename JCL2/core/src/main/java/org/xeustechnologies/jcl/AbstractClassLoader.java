@@ -34,7 +34,6 @@ import java.util.regex.Pattern;
  *
  * @author Kamran Zafar
  */
-@SuppressWarnings("unchecked")
 public abstract class AbstractClassLoader extends ClassLoader {
 
     // we could use concurrent sorted set like ConcurrentSkipListSet here instead, which would be automatically sorted
@@ -92,7 +91,7 @@ public abstract class AbstractClassLoader extends ClassLoader {
      * @see java.lang.ClassLoader#loadClass(java.lang.String)
      */
     @Override
-    public Class loadClass(String className) throws ClassNotFoundException {
+    public Class<?> loadClass(String className) throws ClassNotFoundException {
         return (loadClass(className, true));
     }
 
@@ -104,11 +103,11 @@ public abstract class AbstractClassLoader extends ClassLoader {
      * @see java.lang.ClassLoader#loadClass(java.lang.String, boolean)
      */
     @Override
-    public Class loadClass(String className, boolean resolveIt) throws ClassNotFoundException {
+    public Class<?> loadClass(String className, boolean resolveIt) throws ClassNotFoundException {
         if (className == null || className.trim().equals(""))
             return null;
 
-        Class clazz = null;
+        Class<?> clazz = null;
 
         // Check osgi boot delegation
         if (osgiBootLoader.isEnabled()) {
@@ -250,8 +249,8 @@ public abstract class AbstractClassLoader extends ClassLoader {
         }
 
         @Override
-        public Class loadClass(String className, boolean resolveIt) {
-            Class result;
+        public Class<?> loadClass(String className, boolean resolveIt) {
+            Class<?> result;
 
             try {
                 result = findSystemClass(className);
@@ -306,8 +305,8 @@ public abstract class AbstractClassLoader extends ClassLoader {
         }
 
         @Override
-        public Class loadClass(String className, boolean resolveIt) {
-            Class result;
+        public Class<?> loadClass(String className, boolean resolveIt) {
+            Class<?> result;
 
             try {
                 result = getParent().loadClass(className);
@@ -361,8 +360,8 @@ public abstract class AbstractClassLoader extends ClassLoader {
         }
 
         @Override
-        public Class loadClass(String className, boolean resolveIt) {
-            Class result;
+        public Class<?> loadClass(String className, boolean resolveIt) {
+            Class<?> result;
 
             try {
                 result = getClass().getClassLoader().loadClass(className);
@@ -418,8 +417,8 @@ public abstract class AbstractClassLoader extends ClassLoader {
         }
 
         @Override
-        public Class loadClass(String className, boolean resolveIt) {
-            Class result;
+        public Class<?> loadClass(String className, boolean resolveIt) {
+            Class<?> result;
             try {
                 result = Thread.currentThread().getContextClassLoader().loadClass(className);
             } catch (ClassNotFoundException e) {
@@ -480,8 +479,8 @@ public abstract class AbstractClassLoader extends ClassLoader {
         }
 
         @Override
-        public Class loadClass(String className, boolean resolveIt) {
-            Class clazz = null;
+        public Class<?> loadClass(String className, boolean resolveIt) {
+            Class<?> clazz = null;
 
             if (enabled && isPartOfOsgiBootDelegation(className)) {
                 clazz = getParentLoader().loadClass(className, resolveIt);

@@ -44,7 +44,7 @@ public class CompositeProxyClassLoader extends ProxyClassLoader {
 	}
 
 	@SuppressWarnings("rawtypes") 
-	public Class loadClass(String className, boolean resolveIt) {
+	public Class<?> loadClass(String className, boolean resolveIt) {
 		Class result = null;
 		Iterator<ProxyClassLoader> iterator = proxyClassLoaders.iterator();
 		while (result == null && iterator.hasNext()) {

@@ -24,7 +24,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.jar.JarEntry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,12 +37,11 @@ import org.xeustechnologies.jcl.exception.ResourceNotFoundException;
  * @author Kamran Zafar
  * 
  */
-@SuppressWarnings("unchecked")
 public class JarClassLoader extends AbstractClassLoader {
     /**
      * Class cache
      */
-    protected final Map<String, Class> classes;
+    protected final Map<String, Class<?>> classes;
 
     protected final ClasspathResources classpathResources;
     private char classNameReplacementChar;
@@ -53,14 +51,14 @@ public class JarClassLoader extends AbstractClassLoader {
 
     public JarClassLoader() {
         classpathResources = new ClasspathResources();
-        classes = Collections.synchronizedMap( new HashMap<String, Class>() );
+        classes = Collections.synchronizedMap( new HashMap<String, Class<?>>() );
         initialize();
     }
 
     public JarClassLoader(final ClassLoader parent) {
         super(parent);
         classpathResources = new ClasspathResources();
-        classes = Collections.synchronizedMap( new HashMap<String, Class>() );
+        classes = Collections.synchronizedMap( new HashMap<String, Class<?>>() );
         initialize();
     }
 
@@ -87,7 +85,7 @@ public class JarClassLoader extends AbstractClassLoader {
      * 
      * @param sources
      */
-    public JarClassLoader(List sources) {
+    public JarClassLoader(List<Object> sources) {
         this();
         addAll( sources );
     }
@@ -108,7 +106,7 @@ public class JarClassLoader extends AbstractClassLoader {
      * 
      * @param sources
      */
-    public void addAll(List sources) {
+    public void addAll(List<Object> sources) {
         for (Object source : sources) {
             add( source );
         }
@@ -232,8 +230,8 @@ public class JarClassLoader extends AbstractClassLoader {
         }
 
         @Override
-        public Class loadClass(String className, boolean resolveIt) {
-            Class result = null;
+        public Class<?> loadClass(String className, boolean resolveIt) {
+            Class<?> result = null;
             byte[] classBytes;
 
             result = classes.get( className );
@@ -324,7 +322,7 @@ public class JarClassLoader extends AbstractClassLoader {
      * 
      * @return Map
      */
-    public Map<String, Class> getLoadedClasses() {
+    public Map<String, Class<?>> getLoadedClasses() {
         return Collections.unmodifiableMap( classes );
     }
     

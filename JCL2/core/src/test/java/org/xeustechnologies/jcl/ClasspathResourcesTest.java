@@ -1,15 +1,13 @@
 package org.xeustechnologies.jcl;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 /**
  * Test handling resources inside and outside jars

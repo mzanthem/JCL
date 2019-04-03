@@ -31,8 +31,8 @@ import org.xeustechnologies.jcl.exception.JclException;
  * @author Kamran Zafar
  * 
  */
-@SuppressWarnings("unchecked")
 public class JclObjectFactory {
+	
     private static JclObjectFactory jclObjectFactory = new JclObjectFactory();
     private static boolean autoProxy;
     private final transient Logger logger = LoggerFactory.getLogger(JclObjectFactory.class);
@@ -94,7 +94,7 @@ public class JclObjectFactory {
             }
         }
 
-        Class[] types = new Class[args.length];
+        Class<?>[] types = new Class[args.length];
 
         for (int i = 0; i < args.length; i++)
             types[i] = args[i].getClass();
@@ -113,7 +113,7 @@ public class JclObjectFactory {
      * @param types
      * @return Object
      */
-    public Object create(JarClassLoader jcl, String className, Object[] args, Class[] types) {
+    public Object create(JarClassLoader jcl, String className, Object[] args, Class<?>[] types) {
         Object obj = null;
 
         if (args == null || args.length == 0) {
@@ -151,7 +151,7 @@ public class JclObjectFactory {
                 throw new JclException( e );
             }
         }
-        Class[] types = new Class[args.length];
+        Class<?>[] types = new Class[args.length];
 
         for (int i = 0; i < args.length; i++)
             types[i] = args[i].getClass();
@@ -170,7 +170,7 @@ public class JclObjectFactory {
      * @param types
      * @return Object
      */
-    public Object create(JarClassLoader jcl, String className, String methodName, Object[] args, Class[] types) {
+    public Object create(JarClassLoader jcl, String className, String methodName, Object[] args, Class<?>[] types) {
         Object obj = null;
         if (args == null || args.length == 0) {
             try {
