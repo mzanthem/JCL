@@ -19,6 +19,7 @@ package org.xeustechnologies.jcl.context;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
@@ -78,6 +79,7 @@ public final class JclContext {
     /**
      * Populates the context with JarClassLoader instances
      * 
+     * it's not static method, so you must get an instance before add a jarClassLoader
      * @param name
      * @param jcl
      */
@@ -129,5 +131,12 @@ public final class JclContext {
 
     public static Map<String, JarClassLoader> getAll() {
         return Collections.unmodifiableMap( loaders );
+    }
+    /**
+     * get all jarClassLoader names
+     * @return
+     */
+    public static Set<String> getAllKey() {
+    	return Collections.unmodifiableSet(loaders.keySet());
     }
 }
