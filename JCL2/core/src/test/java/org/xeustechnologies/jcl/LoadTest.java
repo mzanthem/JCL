@@ -272,7 +272,7 @@ public class LoadTest extends TestCase {
         contextLoader.loadContext();
 
         // Test context
-        Object testObj = JclContext.get().loadClass( "org.xeustechnologies.jcl.test.Test" ).newInstance();
+        Object testObj = JclContext.get("jcl").loadClass( "org.xeustechnologies.jcl.test.Test" ).newInstance();
         assertNotNull( testObj );
         assertEquals( "org.xeustechnologies.jcl.JarClassLoader", testObj.getClass().getClassLoader().getClass()
                 .getName() );

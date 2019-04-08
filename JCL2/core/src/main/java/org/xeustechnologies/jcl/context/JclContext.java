@@ -34,7 +34,7 @@ import org.xeustechnologies.jcl.exception.JclContextException;
  * @author Kamran
  * 
  */
-public final class JclContext {
+public class JclContext {
 	/** logger **/
 	private static final Logger logger = LoggerFactory.getLogger(JclContext.class);
 	/** using ConcurrentHashMap replace of Collections.synchronizedMap **/
@@ -45,20 +45,14 @@ public final class JclContext {
     /**
      * singleton
      */
-    static class SingletonHolder {
+    private static class SingletonHolder {
     	private final static JclContext instance = new JclContext();
     }
     public static JclContext getInstance() {
+    	logger.debug("get jclContext intance");
 		return SingletonHolder.instance;
 	}
     
-    /**
-     * hold a default JarClassLoader
-     */
-    static {
-		JarClassLoader classLoader = new JarClassLoader();
-		loaders.put(DEFAULT_NAME, classLoader);
-	}
     
     private JclContext() {
         validate();
@@ -117,6 +111,9 @@ public final class JclContext {
      * @return
      */
     public static JarClassLoader get() {
+    	if (!loaders.containsKey(DEFAULT_NAME)) {
+    		loaders.put(DEFAULT_NAME, new JarClassLoader());
+    	}
         return loaders.get( DEFAULT_NAME );
     }
 
