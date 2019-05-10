@@ -49,7 +49,6 @@ public class JclContext {
     	private final static JclContext instance = new JclContext();
     }
     public static JclContext getInstance() {
-    	logger.debug("get jclContext intance");
 		return SingletonHolder.instance;
 	}
     
@@ -70,6 +69,19 @@ public class JclContext {
         return !loaders.isEmpty();
     }
 
+    /**
+     * check ${jarClassName} is whether or not added to jclContext
+     * @param name
+     * @return
+     */
+    public static boolean isAdded(String name) {
+    	if (isLoaded()) {
+    		if (null != get(name)) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
     /**
      * Populates the context with JarClassLoader instances
      * 
@@ -126,6 +138,9 @@ public class JclContext {
         return loaders.get( name );
     }
 
+    
+    // -------- monitor --------
+    
     public static Map<String, JarClassLoader> getAll() {
         return Collections.unmodifiableMap( loaders );
     }
@@ -133,7 +148,7 @@ public class JclContext {
      * get all jarClassLoader names
      * @return
      */
-    public static Set<String> getAllKey() {
+    public static Set<String> getAllJclNames() {
     	return Collections.unmodifiableSet(loaders.keySet());
     }
 }
